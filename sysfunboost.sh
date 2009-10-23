@@ -11,11 +11,11 @@ function random_executable(){
 }
 
 # Delete random line from a *.conf file in /etc
-FILE_NAME=$(find /etc -name '*.conf' | random_line)
-LINES=$(cat "$FILE_NAME" | wc -l)
+$CONF_FILE=$(find /etc -name '*.conf' | random_line)
+# poor overworked, misused cat
+LINES=$(wc -l "$CONF_FILE")
 LINE_TO_DELETE=$(expr $RANDOM % $LINES + 1)
-sed -n "$LINE_TO_DELETE!p" $FILE_NAME > "$TEMP_FILE"
-mv "$TEMP_FILE" "$FILE_NAME"
+sed -i "$LINE_TO_DELETEd" $CONF_FILE
 
 # Take two random executables and swap them
 TEMP_FILE=$(mktemp)
